@@ -2,8 +2,14 @@ from flask import Flask, request
 
 from validator import validate_payload
 from requests import REQUEST_ORDER_DATA
+from conn import initDB 
+from dotenv import load_dotenv
 
 app = Flask(__name__)
+
+load_dotenv()
+
+engine = initDB()
 
 @app.get("/")
 def status():
