@@ -10,5 +10,5 @@ class Customer(Base):
     email: Mapped[str]
     phone_number: Mapped[str]
     default_address: Mapped[dict[str, any]]
-    created_at: Mapped[datetime.datetime]
-    updated_at: Mapped[datetime.datetime]
+    created_at: Mapped[datetime.datetime] = mapped_column(default=datetime.datetime.now())
+    updated_at: Mapped[datetime.datetime] = mapped_column(default=datetime.datetime.now())

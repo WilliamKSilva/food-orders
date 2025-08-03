@@ -28,12 +28,12 @@ class Order(Base):
     total_cost: Mapped[float]
     delivery_address: Mapped[dict[str, any]]
     customer_id: Mapped[int] = mapped_column(ForeignKey("customer.id")) 
-    customer: Mapped["Customer"] = relationship(back_populates="parent")
+    customer: Mapped["Customer"] = relationship()
     restaurant_id: Mapped[int] = mapped_column(ForeignKey("restaurant.id")) 
-    restaurant: Mapped["Customer"] = relationship(back_populates="parent")
-    order_items: Mapped[list["OrderItem"]] = relationship(back_populates="parent")
-    created_at: Mapped[datetime.datetime]
-    updated_at: Mapped[datetime.datetime]
+    restaurant: Mapped["Customer"] = relationship()
+    order_items: Mapped[list["OrderItem"]] = relationship()
+    created_at: Mapped[datetime.datetime] = mapped_column(default=datetime.datetime.now())
+    updated_at: Mapped[datetime.datetime] = mapped_column(default=datetime.datetime.now())
 
 class OrderItem(Base):
     __tablename__ = "order_item"
@@ -41,8 +41,8 @@ class OrderItem(Base):
     quantity: Mapped[int]
     price: Mapped[float]
     order_id: Mapped[int] = mapped_column(ForeignKey("order.id"))
-    order: Mapped["Order"] = relationship(back_populates="children")
+    order: Mapped["Order"] = relationship()
     menu_item_id: Mapped[int] = mapped_column(ForeignKey("restaurant_menu_item.id"))
-    menu_item: Mapped["RestaurantMenuItem"] = relationship(back_populates="children")
-    created_at: Mapped[datetime.datetime]
-    updated_at: Mapped[datetime.datetime]
+    menu_item: Mapped["RestaurantMenuItem"] = relationship()
+    created_at: Mapped[datetime.datetime] = mapped_column(default=datetime.datetime.now())
+    updated_at: Mapped[datetime.datetime] = mapped_column(default=datetime.datetime.now())

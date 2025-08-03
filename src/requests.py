@@ -12,5 +12,9 @@ REQUEST_CUSTOMER_DATA = {
     "name": str,
     "email": str,
     "phone_number": str,
-    "default_address": dict,
+    "default_address": {
+        "cep": str,
+        "number": str,
+        "complement": str
+    },
 }

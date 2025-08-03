@@ -11,17 +11,17 @@ class Restaurant(Base):
     address: Mapped[dict[str, any]]
     menu_items: Mapped[str]
     is_open: Mapped[bool]
-    created_at: Mapped[datetime.datetime]
-    updated_at: Mapped[datetime.datetime]
+    created_at: Mapped[datetime.datetime] = mapped_column(default=datetime.datetime.now())
+    updated_at: Mapped[datetime.datetime] = mapped_column(default=datetime.datetime.now())
 
 class RestaurantMenuItem(Base):
     __tablename__ = "restaurant_menu_item"
     id: Mapped[int] = mapped_column(primary_key=True)
     restaurant_id: Mapped[int] = mapped_column(ForeignKey("restaurant.id"))
-    restaurant: Mapped["Restaurant"] = relationship(back_populates="children")
+    restaurant: Mapped["Restaurant"] = relationship()
     name: Mapped[str]
     description: Mapped[str]
     price: Mapped[float]
     avaiable: Mapped[bool]
-    created_at: Mapped[datetime.datetime]
-    updated_at: Mapped[datetime.datetime]
+    created_at: Mapped[datetime.datetime] = mapped_column(default=datetime.datetime.now())
+    updated_at: Mapped[datetime.datetime] = mapped_column(default=datetime.datetime.now())
