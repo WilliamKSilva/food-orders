@@ -1,4 +1,5 @@
-
+from enum import Enum
+from models.order import OrderPaymentMethod
 
 def validate_object_missing_fields(object: dict, schema: dict[str, any]) -> str | None:
     object_keys = set(object.keys())
@@ -16,6 +17,11 @@ def validate_object_types(object: dict, schema: dict[str, any], wrong_types: dic
     for k, v in object.items():
         expected_type = schema[k]
         found_type = type(v)
+
+        # TODO: add ENUM type checking and error handling for different values
+        # TODO: understand why checking isinstance(expected_type, Enum) don't work
+        if expected_type == OrderPaymentMethod:
+            continue
 
         if found_type == dict:
             found = {}
